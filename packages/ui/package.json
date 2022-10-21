@@ -1,0 +1,24 @@
+{
+  "name": "@pants/ui",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "gen-version": "node ./scripts/gen_version.js",
+    "test:unit": "vitest --environment jsdom"
+  },
+  "dependencies": {
+    "vue": "^3.2.37"
+  },
+  "devDependencies": {
+    "@unocss/vite": "^0.45.30",
+    "@vitejs/plugin-vue": "^3.1.0",
+    "typescript": "^4.6.4",
+    "unocss": "^0.45.30",
+    "vite": "^3.1.0",
+    "vue-tsc": "^0.40.4"
+  }
+}
