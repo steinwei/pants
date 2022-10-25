@@ -1,6 +1,6 @@
 import * as components from './components'
-import { COLORS_KEY, THEME_KEY, ICON_KEY } from './utils/constants'
 import { type App } from 'vue'
+import { injectColorKey, injectThemeKey, injectIconKey } from './keys'
 
 interface InjectOptionFieldsType {
     color?: string
@@ -10,10 +10,12 @@ interface InjectOptionFieldsType {
 }
 
 export function install(app: App, options: InjectOptionFieldsType) {
-    if(options.component) {
-        app.component(component, component)
-    }
-    app.provide(COLORS_KEY, options.color || undefined)
-    app.provide(THEME_KEY, options.theme || undefined)
-    app.provide(ICON_KEY, options.icon || undefined)
+    Object.keys(components).forEach(key => {
+        const component = components[key]
+        const name = component.name.startWith('P') ? component.name : 'P' + component.name
+        app.component(name, component)
+    })
+    app.provide(injectColorKey, options.color || undefined)
+    app.provide(injectThemeKey, options.theme || undefined)
+    app.provide(injectIconKey, options.icon || undefined)
 }

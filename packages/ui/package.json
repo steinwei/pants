@@ -7,13 +7,15 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "gen-version": "node ./scripts/gen_version.js",
+    "gen-version": "node ./scripts/gen_version.cjs",
     "test:unit": "vitest --environment jsdom"
   },
   "dependencies": {
     "vue": "^3.2.37"
   },
   "devDependencies": {
+    "@unocss/preset-mini": "^0.45.30",
+    "@unocss/preset-uno": "^0.45.30",
     "@unocss/vite": "^0.45.30",
     "@vitejs/plugin-vue": "^3.1.0",
     "typescript": "^4.6.4",

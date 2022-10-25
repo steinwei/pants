@@ -1,5 +1,12 @@
 <template>
-    <component :is="" :type="type" >
+    <component :class="[
+        classes.wrapper,
+        className,
+    ]"
+    :style="styles"
+    ref="elRef"
+    :disabled="computedDisabled || loading"
+    >
         <span>
             <slot></slot>
         </span>
@@ -13,13 +20,25 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { defineProps, type PropType, ref } from 'vue'
-import { useTheme } from '../../utils/theme'
+import { type PropType, ref, computed, useAttrs } from 'vue'
+import { useTheme } from '../../composables/theme'
+import theme from './Button.theme'
+
+const elRef = ref(null)
 
 const props = defineProps({
     type: {
         type: String as PropType<'default' | 'primary' | 'danger' | 'disabled'>,
         default: 'default',
-    }
+    },
+    disabled: {
+        type: Boolean,
+        default: false,
+    },
+    className: String,
+    styles: Object,
+    loading: Boolean,
 })
+
+const { classes } = useTheme('button', theme, props)
 </script>

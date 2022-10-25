@@ -2,8 +2,8 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import unocss from '@unocss/vite'
-import presetAttributify from '@unocss/preset-attributify'
 import presetUno from '@unocss/preset-uno'
+import presetMini, { colors } from '@unocss/preset-mini'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,7 +11,13 @@ export default defineConfig({
     plugins: [vue(), unocss({
       presets: [
         presetUno(),
-        presetAttributify(),
+        presetMini({
+            theme: {
+                colors: {
+                    primary: colors.emerald,
+                }
+            }
+        }),
       ],
     })],
     build: {

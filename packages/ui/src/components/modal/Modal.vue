@@ -3,7 +3,7 @@
         ...classes,
         props.visible ? 'visible' : 'invisible ease-out-5s'
     ]">
-    
+        <slot></slot>
     </component>
 </template>
 
@@ -14,12 +14,12 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, defineProps, defineEmits, Type PropType } from 'vue'
-import { useTheme } from '../../utils'
+import { ref, type PropType } from 'vue'
+import { useTheme } from '../../composables/theme'
 
 const props = defineProps({
     visible: {
-        type: String,
+        type: Boolean,
         default: false,
     },
     size: {
@@ -43,7 +43,7 @@ watch(visible, () => {
 })
 
 watch(()=> props.visible, () => {
-    
+    visible.value = props.visible
 })
 
 function keydown(event: KeyboardEvent) { 
