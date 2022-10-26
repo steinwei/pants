@@ -1,6 +1,6 @@
 import * as components from './components'
 import { type App } from 'vue'
-import { injectColorKey, injectThemeKey, injectIconKey } from './keys'
+import { injectColorKey, injectThemeKey, injectIconKey } from './composables/keys'
 
 interface InjectOptionFieldsType {
     color?: string

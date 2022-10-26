@@ -26,7 +26,7 @@ function isFunction(fn: any): boolean {
     return typeof fn == 'function'
 }
 
-function getClasses(theme: any, params: any) {
+function getClasses(theme: any, params?: any) {
     let ret = undefined
     const base = [String, Boolean, Number, undefined, null]
     const isBase = base.some(item => theme instanceof item)
@@ -45,7 +45,7 @@ function getClasses(theme: any, params: any) {
     return ret
 }
 
-function getStyles(theme: any, params: any) {
+function getStyles(theme: any, params?: any) {
     return {}
 }
 
