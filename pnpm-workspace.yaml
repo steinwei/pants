@@ -1,0 +1,5 @@
+prefer-workspace-packages: true
+packages:
+    - 'packages/ui'
+    - 'packages/docs'
+    - 'packages/resume-example'
