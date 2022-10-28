@@ -20,7 +20,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { ref, computed, useAttrs } from 'vue'
+import { ref, computed } from 'vue'
 import type { PropType } from 'vue';
 import { useTheme } from '../../composables/theme'
 import theme from './Button.theme'
@@ -36,10 +36,7 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
-    rounded: {
-        type: Boolean,
-        default: false,
-    },
+    rounded: Boolean,
     className: String,
     styles: Object,
     loading: Boolean,

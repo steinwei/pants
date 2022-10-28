@@ -4,10 +4,6 @@ export * from './composables'
 
 import { install } from './install'
 
-function create() {
-    return {
-        install
-    }
+export default {
+    install
 }
-
-export default create()
