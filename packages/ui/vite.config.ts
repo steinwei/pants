@@ -7,7 +7,7 @@ import presetMini, { colors } from '@unocss/preset-mini'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    publicDir: path.resolve(__dirname, './public')
+    publicDir: path.resolve(__dirname, './public'),
     plugins: [vue(), unocss({
       presets: [
         presetUno(),
@@ -21,12 +21,12 @@ export default defineConfig({
       ],
     })],
     build: {
-        entry: path.resolve(__dirname, './src/main.ts'),
-        output: {
-            outDir: 'lib',
+        outDir: 'lib',
+        lib: {
             formats: ['es','cjs'],
-            filename: format => `[name].${format}.js`,
+            fileName: format => `[name].${format}.js`,
             name: 'pants',
+            entry: path.resolve(__dirname, 'src/index.ts'),
         },
         rollupOptions: {
             external: ['vue'],
