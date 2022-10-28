@@ -9,8 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@pants/ui": "workspace: *",
     "vue": "^3.2.37",
-    "@pants/ui": "workspace: *"
+    "vue-router": "4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.1.0",

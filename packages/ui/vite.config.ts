@@ -3,7 +3,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import unocss from '@unocss/vite'
 import presetUno from '@unocss/preset-uno'
-import presetMini, { colors } from '@unocss/preset-mini'
+import presetMini from '@unocss/preset-mini'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,13 +11,7 @@ export default defineConfig({
     plugins: [vue(), unocss({
       presets: [
         presetUno(),
-        presetMini({
-            theme: {
-                colors: {
-                    primary: colors.emerald,
-                }
-            }
-        }),
+        presetMini(),
       ],
     })],
     build: {

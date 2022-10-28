@@ -1,14 +1,21 @@
-import { computed, unref } from 'vue'
+import { computed, unref, inject } from 'vue'
+import type { Slots } from 'vue'
 import { injectThemeKey } from './keys'
-import { useCss } from './css'
+
+export interface ThemeParams {
+    props: any
+    colors?: any
+    slots?: Slots
+    data?: any
+    css?: any
+}
 
 export function useTheme(namespace: string, defaultTheme: any, props: any, data?: any) {
-    const theme = inject(injectThemeKey, {})
+    const theme = inject(injectThemeKey, {} as any)
     console.log(theme)
     const classPrefix = computed(() => unref(theme).classPrefix ?? 'p-')
     const className = computed(() => `${classPrefix.value}${namespace}`)
 
-    const css = useCss(namespace)
 
     const classes = computed(() => getClasses(defaultTheme.classes, unref(props)))
 
@@ -18,7 +25,6 @@ export function useTheme(namespace: string, defaultTheme: any, props: any, data?
         classes,
         classPrefix,
         styles,
-        css,
     }
 }
 
@@ -28,13 +34,13 @@ function isFunction(fn: any): boolean {
 
 function getClasses(theme: any, params?: any) {
     let ret = undefined
-    const base = [String, Boolean, Number, undefined, null]
+    const base = [String, Boolean, Number]
     const isBase = base.some(item => theme instanceof item)
     if(isBase) {
         return theme
     }
 
-    ret = {}
+    ret = {} as any
     for(const proper in theme) {
         if(isFunction(theme[proper])) {
             ret[proper] = theme[proper](params)

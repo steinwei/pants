@@ -1,8 +1,13 @@
-import { colors } from '@unocss/preset-mini'
-
 export * from './components'
-export * from './install'
+export { default as version } from './version'
+export * from './composables'
 
-export {
-    colors
+import { install } from './install'
+
+function create() {
+    return {
+        install
+    }
 }
+
+export default create()

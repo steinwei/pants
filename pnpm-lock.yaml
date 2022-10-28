@@ -15,10 +15,12 @@ importers:
       typescript: ^4.6.4
       vite: ^3.1.0
       vue: ^3.2.37
+      vue-router: '4'
       vue-tsc: ^0.40.4
     dependencies:
       '@pants/ui': link:../ui
       vue: registry.npmmirror.com/vue/3.2.41
+      vue-router: registry.npmmirror.com/vue-router/4.1.6_vue@3.2.41
     devDependencies:
       '@vitejs/plugin-vue': registry.npmmirror.com/@vitejs/plugin-vue/3.1.2_vite@3.1.8+vue@3.2.41
       typescript: registry.npmmirror.com/typescript/4.8.4
@@ -1375,6 +1377,12 @@ packages:
       '@vue/compiler-dom': registry.npmmirror.com/@vue/compiler-dom/3.2.41
       '@vue/shared': registry.npmmirror.com/@vue/shared/3.2.41
 
+  registry.npmmirror.com/@vue/devtools-api/6.4.5:
+    resolution: {integrity: sha512-JD5fcdIuFxU4fQyXUu3w2KpAJHzTVdN+p4iOX2lMWSHMOoQdMAcpFLZzm9Z/2nmsoZ1a96QEhZ26e50xLBsgOQ==, registry: https://r.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vue/devtools-api/-/devtools-api-6.4.5.tgz}
+    name: '@vue/devtools-api'
+    version: 6.4.5
+    dev: false
+
   registry.npmmirror.com/@vue/reactivity-transform/3.2.41:
     resolution: {integrity: sha512-mK5+BNMsL4hHi+IR3Ft/ho6Za+L3FA5j8WvreJ7XzHrqkPq8jtF/SMo7tuc9gHjLDwKZX1nP1JQOKo9IEAn54A==, registry: https://r.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vue/reactivity-transform/-/reactivity-transform-3.2.41.tgz}
     name: '@vue/reactivity-transform'
@@ -2047,6 +2055,18 @@ packages:
         optional: true
     dependencies:
       vue: 3.2.41
+    dev: false
+
+  registry.npmmirror.com/vue-router/4.1.6_vue@3.2.41:
+    resolution: {integrity: sha512-DYWYwsG6xNPmLq/FmZn8Ip+qrhFEzA14EI12MsMgVxvHFDYvlr4NXpVF5hrRH1wVcDP8fGi5F4rxuJSl8/r+EQ==, registry: https://r.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-router/-/vue-router-4.1.6.tgz}
+    id: registry.npmmirror.com/vue-router/4.1.6
+    name: vue-router
+    version: 4.1.6
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@vue/devtools-api': registry.npmmirror.com/@vue/devtools-api/6.4.5
+      vue: registry.npmmirror.com/vue/3.2.41
     dev: false
 
   registry.npmmirror.com/vue-tsc/0.40.13_typescript@4.8.4:

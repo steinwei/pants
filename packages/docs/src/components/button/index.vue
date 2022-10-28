@@ -5,14 +5,13 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { Button } from '@pants/ui'
+import { PButton } from '@pants/ui'
 </script>
 
 <template>
     <div>
-        <Button type="primary">primary</Button>
-        <Button type="default">default</Button>
-        <Button disable>disabled</Button>
-        <Button type="danger">danger</Button>
+        <PButton>
+            test
+        </PButton>
     </div>
 </template>
