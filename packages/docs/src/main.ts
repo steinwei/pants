@@ -1,11 +1,15 @@
 import { createApp } from 'vue'
-import './style.css'
 import App from './App.vue'
+
+import 'uno.css'
 
 import UI from '@pants/ui'
 import theme from './theme'
+import router from './router'
 
 const app = createApp(App)
+
+app.use(router)
 
 app.use(UI, {
     prefix: 'P',
