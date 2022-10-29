@@ -3,10 +3,14 @@ import type { ThemeParams } from '../../composables/theme'
 export default {
     classes: {
         wrapper({props, slots}: ThemeParams) {
-            const classes = [`relative transition duration-150 focus:outline-none inline-flex
-            justify-center font-medium whitespace-nowrap overflow-hidden align-middle border`]
+            const classes = [
+                'font-medium whitespace-nowrap align-middle',
+                'flex justify-center overflow-hidden relative border',
+                'transition duration-150 focus:outline-none',
+            ]
 
-            const { rounded = false, disabled = false, loading = false, size = 'sm', light = true, dark = false } = props
+            const { rounded = false,
+                disabled = false, loading = false, size = 'sm', light = true, dark = false } = props
 
             classes.push(rounded ? 'rounded-full' : 'rounded-md')
 

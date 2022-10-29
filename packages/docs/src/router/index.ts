@@ -5,12 +5,13 @@ import SimpleLayout from "../layouts/simple.vue";
 const pages = import.meta.globEager('@/pages/components/*/index.vue')
 
 const ComponentPages = Object.keys(pages).map((path: string) => {
-    const match = path.match(/\.\/pages\/component\/(.*)\/index\.vue$/)
+    const match = path.match(/src\/pages\/components\/(.*)\/index\.vue$/)
 
     if (!match) return null
   
     const name = match[1].toLowerCase()
-    console.log(name, pages)
+
+    console.log(name, pages, path)
 
     return {
       path: name,
@@ -21,13 +22,13 @@ const ComponentPages = Object.keys(pages).map((path: string) => {
 export const routes: RouteRecordRaw[] = [{
     path: '/',
     component: DefaultLayout,
-    // children: [
-    //     {
-    //         path: 'component',
-    //         component: SimpleLayout,
-    //         children: ComponentPages,
-    //     }
-    // ]
+    children: [
+        {
+            path: 'component',
+            component: SimpleLayout,
+            children: ComponentPages,
+        }
+    ]
 }]
 
 export default createRouter({

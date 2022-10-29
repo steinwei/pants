@@ -1,4 +1,4 @@
-import { ThemeParams } from "../../composables";
+import type { ThemeParams } from "../../composables";
 
 export default {
     classes: {

@@ -1,4 +1,4 @@
-import { computed, unref, inject } from 'vue'
+import { computed, unref, inject, useSlots } from 'vue'
 import type { Slots } from 'vue'
 import { injectThemeKey } from './keys'
 
@@ -12,14 +12,21 @@ export interface ThemeParams {
 
 export function useTheme(namespace: string, defaultTheme: any, props: any, data?: any) {
     const theme = inject(injectThemeKey, {} as any)
-    console.log(theme)
+
     const classPrefix = computed(() => unref(theme).classPrefix ?? 'p-')
     const className = computed(() => `${classPrefix.value}${namespace}`)
 
+    const slots = useSlots()
 
-    const classes = computed(() => getClasses(defaultTheme.classes, unref(props)))
+    const classes = computed(() => getClasses(defaultTheme.classes, {
+        props: unref(props),
+        slots,
+    }))
 
-    const styles = computed(() => getStyles(defaultTheme.styles, unref(props)))
+    const styles = computed(() => getStyles(defaultTheme.styles, {
+        props: unref(props),
+        slots,
+    }))
 
     return {
         classes,
@@ -41,7 +48,7 @@ function getClasses(theme: any, params?: any) {
     }
 
     ret = {} as any
-    for(const proper in theme) {
+    for (const proper in theme) {
         if(isFunction(theme[proper])) {
             ret[proper] = theme[proper](params)
         } else {

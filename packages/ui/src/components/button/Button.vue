@@ -36,7 +36,11 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
-    rounded: Boolean,
+    rounded: {
+        type: Boolean,
+        default: false,
+    },
+    size: String as PropType<'sm' | 'xs' | 'md' | 'lg'>,
     className: String,
     styles: Object,
     loading: Boolean,
