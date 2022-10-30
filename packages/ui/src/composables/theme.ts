@@ -1,6 +1,8 @@
 import { computed, unref, inject, useSlots } from 'vue'
 import type { Slots } from 'vue'
 import { injectThemeKey } from './keys'
+import { useColors } from './colors'
+import { useCss } from './css'
 
 export interface ThemeParams {
     props: any
@@ -17,18 +19,24 @@ export function useTheme(namespace: string, defaultTheme: any, props: any, data?
     const className = computed(() => `${classPrefix.value}${namespace}`)
 
     const slots = useSlots()
+    const colors = useColors()
+    const css = useCss(namespace)
 
     const classes = computed(() => getClasses(defaultTheme.classes, {
         props: unref(props),
         slots,
+        colors,
     }))
 
     const styles = computed(() => getStyles(defaultTheme.styles, {
         props: unref(props),
         slots,
+        colors,
+        css,
     }))
 
     return {
+        colors,
         classes,
         classPrefix,
         styles,
@@ -39,18 +47,22 @@ function isFunction(fn: any): boolean {
     return typeof fn == 'function'
 }
 
-function getClasses(theme: any, params?: any) {
+function getClasses(source: any, params?: any) {
     let ret = undefined
     const base = [String, Boolean, Number]
-    const isBase = base.some(item => theme instanceof item)
+    const isBase = base.some(item => source instanceof item)
     if(isBase) {
-        return theme
+        return source
+    }
+
+    if (isFunction(source)) {
+        return source(params)
     }
 
     ret = {} as any
-    for (const proper in theme) {
-        if(isFunction(theme[proper])) {
-            ret[proper] = theme[proper](params)
+    for (const proper in source) {
+        if(isFunction(source[proper])) {
+            ret[proper] = source[proper](params)
         } else {
             ret[proper] = getClasses(ret[proper])
         }
@@ -58,8 +70,24 @@ function getClasses(theme: any, params?: any) {
     return ret
 }
 
-function getStyles(theme: any, params?: any) {
-    return {}
+function getStyles(source: any, params?: any) {
+    const base = [String, Boolean, Number]
+    const isBase = base.some(item => source instanceof item)
+    if (isBase) return source
+    
+    if (isFunction(source)) {
+       return source(params)
+    }
+    
+    let ret = {} as any
+    for (const proper in source) {
+        if (isFunction(source[proper])) {
+            ret[proper] = source[proper](params)
+        } else {
+            ret[proper] = source
+        }
+    }
+    return ret
 }
 
 

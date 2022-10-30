@@ -11,8 +11,6 @@ const ComponentPages = Object.keys(pages).map((path: string) => {
   
     const name = match[1].toLowerCase()
 
-    console.log(name, pages, path)
-
     return {
       path: name,
       component: (pages[path] as any).default,

@@ -28,7 +28,7 @@ export default {
 </script>
 
 <template>
-    <p v-show="show" class="fixed bottom-0 left-0 w-full bg-white z-40 p-4">
+    <p v-show="show" fixed bottom-0 left-0 w-full bg-white z-40 p-4 bg-blue>
         We use cookies for analysis.
         <p-button @click="gotit">
             Got It

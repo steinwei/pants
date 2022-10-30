@@ -10,7 +10,7 @@ export default {
             ]
 
             const { rounded = false,
-                disabled = false, loading = false, size = 'sm', light = true, dark = false } = props
+                disabled = false, loading = false, size = 'sm' } = props
 
             classes.push(rounded ? 'rounded-full' : 'rounded-md')
 
@@ -23,18 +23,30 @@ export default {
             else if (size == 'md') classes.push(slots?.default ? 'py-3 text-md' : 'leading-none')
             else if (size == 'lg') classes.push(slots?.default ? 'py-4 text-lg' : 'leading-none')
             
-            if (light) classes.push()
-            else if(dark) classes.push()
 
             return classes
         },
     },
-    styles({}) {
-        const sheet = {
-            'background-color': 'blue'
-        }
+    styles({ props, colors, css }: ThemeParams) {
+        const styles = []
+        const { light, dark, color: customColor } = props
 
-        return sheet
+        const color = customColor ? colors.makeColor(customColor) : colors.makeColor('gray')
+        
+        // if (light) 
+            styles.push(css.vars({
+                bg: 'slate',
+                text: color[800],
+                border: color[300],
+                hover: { bg: !props.loading ? color[100] : '' },
+                active: { bg: !props.loading ? color[200] : '' },
+            }))
+        // else if (dark) 
+        //     styles.push(css.vars({
+                
+        //     }))
+
+        return styles
     },
 
 }

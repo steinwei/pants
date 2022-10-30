@@ -15,12 +15,12 @@ const props = defineProps({
         type: String,
         default: 'modal'
     },
+    value: Boolean,
     visible: Boolean,
     className: String,
 })
 
 const emits = defineEmits(['update:modal'])
-const htmlTag = computed(() => props.tag)
 const { classes } = useTheme('modal', theme, props)
 
 const modalRef = ref(null)
@@ -74,12 +74,12 @@ defineExpose({
 
 <template>
     <teleport to="body">
-        <div :class="[classes.wrapper, className, visible ? 'opacity-100' : 'opacity-0']">
+        <div :class="[classes.wrapper, className]" v-if="state.visible">
             <div ref="modalRef" class="">
                 <div v-if="$slots.header" :class="classes.header">
                     <slot name="header"></slot>
                     <!-- TODO: replace with icon x -->
-                    <div @click="close">
+                    <div class="py-1 px-2 border" @click="close">
                         X
                     </div>
                 </div>

@@ -1,27 +1,12 @@
 import path from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import unocss from '@unocss/vite'
-import presetUno from '@unocss/preset-uno'
-import presetMini, { colors } from '@unocss/preset-mini'
+import unocss from 'unocss/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
     publicDir: path.resolve(__dirname, './src/exports'),
-    plugins: [vue(), unocss({
-      presets: [
-        presetUno(),
-        presetMini({
-            theme: {
-                colors: {
-                    'light': {
-                        'primary': colors.emerald
-                    }
-                },
-            }
-        }),
-      ],
-    })],
+    plugins: [vue(), unocss()],
     build: {
         outDir: 'lib',
         lib: {
