@@ -1,18 +1,18 @@
 import { computed, inject, unref } from 'vue'
-import { colors } from 'unocss/preset-mini'
+import { tailwindColors } from './colors-utils'
 import { injectThemeKey } from './keys'
 
 const defaultColors = {
-    primary: colors?.sky,
-    success: colors?.emerald,
-    error: colors?.red,
-    warn: colors?.amber,
-    default: colors?.slate,
+    primary: tailwindColors['sky'],
+    success: tailwindColors['emerald'],
+    error: tailwindColors['red'],
+    warn: tailwindColors['amber'],
+    default: tailwindColors['slate'],
 }
 
 export function useColors() {
-    const globalTheme = inject(injectThemeKey, { colors: {} })
-    const customColors = computed(() => Object.assign(unref(globalTheme).colors, defaultColors))
+    const globalTheme = inject(injectThemeKey, {})
+    const customColors = computed(() => ({...defaultColors, ...unref(globalTheme).colors}))
 
     function makeOpacity(opacity?: number) {
         return 0.5
@@ -20,20 +20,20 @@ export function useColors() {
 
     function makeColor(color?: string) { 
         try {
-            const twColor = colors?.[color as keyof object]
+            const twColor = tailwindColors?.[color as keyof object]
             if (twColor) return twColor
             
-            const unrefCustomColors = unref(customColors)?.[color as keyof object]
-            if (unrefCustomColors) return customColors[color as keyof object]
-            
-            const palette = {
+            const unrefCustomColors = unref(customColors)
 
-            }
+            if (unrefCustomColors?.[color as keyof object]) return unrefCustomColors?.[color as keyof object]
+            
+            const palette = tailwindColors.slate
 
             return palette
         } catch (err) {
+            console.log(err)
             // twcolor.slate
-            return '#f1f5f9'           
+            return tailwindColors.slate      
         }
     }
 

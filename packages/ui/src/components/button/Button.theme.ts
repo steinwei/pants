@@ -32,10 +32,10 @@ export default {
         const { light, dark, color: customColor } = props
 
         const color = customColor ? colors.makeColor(customColor) : colors.makeColor('gray')
-        
+
         // if (light) 
             styles.push(css.vars({
-                bg: 'slate',
+                bg: color[100],
                 text: color[800],
                 border: color[300],
                 hover: { bg: !props.loading ? color[100] : '' },

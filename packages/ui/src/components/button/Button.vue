@@ -1,11 +1,11 @@
 <template>
     <component :is="htmlTag" :class="[
-        $style['button'],
-        className,
+        $style.button,
         classes.wrapper,
+        className,
     ]"
-    :type="type"
     :style="styles"
+    :type="type"
     ref="elRef"
     :disabled="computedDisabled || loading"
     >
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { ref, computed, unref } from 'vue'
+import { ref, computed } from 'vue'
 import type { PropType } from 'vue';
 import { useTheme } from '../../composables/theme'
 import theme from './Button.theme'
@@ -42,10 +42,7 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
-    type: {
-        type: String,
-        default: 'button'
-    },
+    type: String as PropType<'submit' | undefined | 'reset'>,
     size: String as PropType<'sm' | 'xs' | 'md' | 'lg'>,
     className: String,
     loading: Boolean,
@@ -59,11 +56,12 @@ const { classes, styles } = useTheme('button', theme, props)
 
 const computedDisabled = computed(() => props.disabled)
 const htmlTag = computed(() => props.tag)
+
 </script>
 
-<style scoped module lang="postcss">
+<style module scoped>
 .button {
-    color: var(--p--button-text);
+    color: var(--p-button-text);
     background-color: var(--p-button-bg);
     border-color: var(--p-button-border);
 }

@@ -1,3 +1,5 @@
-export const injectColorKey = Symbol('injectColorKey')
-export const injectThemeKey = Symbol('injectThemeKey')
-export const injectIconKey = Symbol('injectIconKey') 
+import type { InjectionKey } from "vue"
+
+export const injectColorKey = Symbol() as InjectionKey<any>
+export const injectThemeKey = Symbol() as InjectionKey<any>
+export const injectIconKey = Symbol()  as InjectionKey<any>
