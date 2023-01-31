@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.11.7",
+    "@unocss/core": "^0.46.1",
     "@unocss/preset-uno": "^0.46.1",
     "@vitejs/plugin-vue": "^3.1.0",
     "@vue/test-utils": "^2.2.0",

@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, reactive, ref, watch } from "vue";
+import { reactive, ref, watch } from "vue";
 import theme from './Modal.theme'
 import { useTheme } from "../../composables";
 import { useEventListener } from '@vueuse/core'

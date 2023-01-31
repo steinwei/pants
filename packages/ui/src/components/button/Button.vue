@@ -42,7 +42,10 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
-    type: String as PropType<'submit' | undefined | 'reset'>,
+    type: {
+        type: String,
+        default: 'button',
+    },
     size: String as PropType<'sm' | 'xs' | 'md' | 'lg'>,
     className: String,
     loading: Boolean,
