@@ -74,6 +74,7 @@ defineExpose({
 
 <template>
     <teleport to="body">
+        <div class="mask" />
         <div :class="[classes.wrapper, className]" v-if="state.visible">
             <div ref="modalRef" class="">
                 <div v-if="$slots.header" :class="classes.header">
@@ -96,3 +97,24 @@ defineExpose({
         </div>
     </teleport>
 </template>
+
+<style scoped>
+::global {
+  color: var(--modal-theme);
+}
+
+.mask {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+}
+.modal {
+  position: fixed;
+  
+}
+</style>

@@ -1,26 +1,44 @@
 <template>
-    <div>
-
-    </div>
+    <img :src="source" :class="[...classes]" />
 </template>
 
 <script lang="ts">
 export default {
-    name: 'PImg'
+    name: 'PImage'
 }
 </script>
 
 <script lang="ts" setup>
-import { PropType, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue';
+import { useTheme } from '../../composables'
+import theme from './Image.theme'
 
-const ref1 = ref(null)
+const fallback = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
+const source = ref<string|undefined>(fallback)
 
 const props = defineProps({
-    test: {
-        type: String as PropType<'test'>,
-        default: '',
+    onLoad: {
+        type: Function,
+    },
+    src: {
+        type: String,
     }
 })
-</script>
 
-<style></style>
+const { classes } = useTheme('image', theme, props)
+
+function preload(src: string | undefined, onLoad: Function | undefined) {
+  const image = new Image()
+  image.src = src || ''
+  image.onload = () => {
+    onLoad?.()
+  }
+}
+
+if(typeof window !== undefined && Image) {
+  watch(() => props.src, (src) => {
+    preload(src, props.onLoad)
+  }, { immediate: true })
+}
+
+</script>
