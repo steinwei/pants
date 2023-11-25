@@ -1,120 +1,59 @@
+<template>
+  <Teleport to="body">
+    <div
+      v-if="visible"
+    >
+      <header v-if="$slots.header">
+        <slot name="header"></slot>
+      </header>
+      <main>
+        <slot></slot>
+      </main>
+      <footer v-if="$slots.footer">
+        <slot name="footer"></slot>
+      </footer>
+    </div>
+  </Teleport>
+</template>
+
 <script lang="ts">
 export default {
-    name: 'PModal'
+  name: 'PModal'
 }
 </script>
 
 <script setup lang="ts">
-import { reactive, ref, watch } from "vue";
-import theme from './Modal.theme'
-import { useTheme } from "../../composables";
-import { useEventListener } from '@vueuse/core'
+import { ref, watch, withDefaults } from 'vue';
 
-const props = defineProps({
-    tag: {
-        type: String,
-        default: 'modal'
-    },
-    value: Boolean,
-    visible: Boolean,
-    className: String,
-})
+type ModalProp = {
+  modalValue?: boolean
+}
 
-const emits = defineEmits(['update:modal'])
-const { classes } = useTheme('modal', theme, props)
+const emits = defineEmits(['update:modalValue'])
 
-const modalRef = ref(null)
-
-const state = reactive({
-    visible: false,
-    confirm: false,
-})
-
-watch(() => props.visible, () => {
-    state.visible = props.visible
-    if (state.visible) {
-        open()
-    } else {
-        close()
-    }
-})
-
-if (window != undefined) useEventListener(document, 'keydown', onKeyDown)
+const props = withDefaults(defineProps<ModalProp>(), {})
+const visible = ref(props.modalValue || false)
 
 function open() {
-    state.visible = true
-    emits('update:modal', true)
+  visible.value = true
+  emits('update:modalValue', true)
 }
 
-function close() { 
-    state.visible = false
-    emits('update:modal', false)
-    if (state.confirm) {
-        state.confirm = false
-    }
+function close() {
+  visible.value = false
+  emits('update:modalValue', false)
 }
 
-function confirm() {
+watch(() => props.modalValue, (newValue) => {
+  if (newValue) {
     open()
-    state.confirm = true
-}
-
-function onKeyDown(event: KeyboardEvent) {
-    if (event.key == 'Escape' && state.visible) {
-        close()
-    }
-}
+  } else {
+    close()
+  }
+})
 
 defineExpose({
-    open,
-    close,
-    confirm,
+  open,
+  close,
 })
 </script>
-
-<template>
-    <teleport to="body">
-        <div class="mask" />
-        <div :class="[classes.wrapper, className]" v-if="state.visible">
-            <div ref="modalRef" class="">
-                <div v-if="$slots.header" :class="classes.header">
-                    <slot name="header"></slot>
-                    <!-- TODO: replace with icon x -->
-                    <div class="py-1 px-2 border" @click="close">
-                        X
-                    </div>
-                </div>
-                <div :class="classes.content">
-                    <slot></slot>
-                </div>
-                <div v-if="!$slots.footer && state.confirm" @click="close">
-                    I Got It!
-                </div>
-                <div v-if="$slots.footer" :class="classes.footer">
-                    <slot name="footer"></slot>
-                </div>
-            </div>
-        </div>
-    </teleport>
-</template>
-
-<style scoped>
-::global {
-  color: var(--modal-theme);
-}
-
-.mask {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 999;
-}
-.modal {
-  position: fixed;
-  
-}
-</style>

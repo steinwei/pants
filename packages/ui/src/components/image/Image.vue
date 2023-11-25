@@ -9,7 +9,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { onMounted, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { useTheme } from '../../composables'
 import theme from './Image.theme'
 

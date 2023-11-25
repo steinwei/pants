@@ -1,26 +1,39 @@
+
 <template>
     <div>
-        <p-button @click="open">showModal</p-button>
-        <p-modal :visible="state.visible">
-            <template #header>
-                this is header.
-            </template>
+        <p-button type="primiary" @click="open">open modal</p-button>
+        <p-modal
+          :modalValue="visible"
+            @update:modalValue="test"
+          >
+          <template #header>
+            <div>
+            this is header.
+            </div>
+          </template>
+          <div>
+            this is content.
+          </div>
+          <template #footer>
+            <div>
+              this is footer.
+            </div>
+          </template>
         </p-modal>
     </div>
 </template>
 
-<script lang="ts" setup>
-import { reactive } from 'vue'
-import { PModal, PButton } from '@pants/ui'
+<script setup lang="ts">
+import { ref, unref } from 'vue'
 
-const state = reactive({
-    visible: false,
-    visible1: false,
-    visible2: false,
-})
+const visible = ref(false)
 
 function open() {
-    state.visible = true
+  visible.value = !unref(visible)
+}
+
+function test(val: boolean) {
+  console.log(val)
 }
 
 </script>

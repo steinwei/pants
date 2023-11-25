@@ -17,6 +17,7 @@ export default {
             uiComponents: [
                 { to: '/component/button', label: 'Button' },
                 { to: '/component/modal', label: 'Modal' },
+                { to: '/component/countdown', label: 'Countdown' },
             ],
             docsComponents: [
                 { to: '/get-start', label: 'start' },

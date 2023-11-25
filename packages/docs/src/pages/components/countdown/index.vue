@@ -1,4 +1,3 @@
-
 <template>
     <Docs :demos="demos" />
 </template>

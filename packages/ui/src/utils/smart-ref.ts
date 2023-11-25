@@ -1,3 +1,4 @@
-export  function smartRef(various: any) {
+// TODO: deepRefObject
+export function smartRef(various: any) {
     return ''
 }
