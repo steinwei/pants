@@ -3,7 +3,10 @@
     "compilerOptions": {
         "types": ["jsdom", "node"],
         "lib": [],
-        "composite": true
+        "composite": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    },
     },
     "include": ["test/**/*"],
     "exclude": ["node_modules/*"]
