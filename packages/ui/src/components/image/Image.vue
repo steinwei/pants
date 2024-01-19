@@ -1,10 +1,10 @@
 <template>
-    <img :src="source" :class="[...classes]" />
+  <img :src="source" :class="[...classes]" />
 </template>
 
 <script lang="ts">
 export default {
-    name: 'PImage'
+  name: 'PImage'
 }
 </script>
 
@@ -14,15 +14,15 @@ import { useTheme } from '../../composables'
 import theme from './Image.theme'
 
 const fallback = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
-const source = ref<string|undefined>(fallback)
+const source = ref<string | undefined>(fallback)
 
 const props = defineProps({
-    onLoad: {
-        type: Function,
-    },
-    src: {
-        type: String,
-    }
+  onLoad: {
+    type: Function,
+  },
+  src: {
+    type: String,
+  }
 })
 
 const { classes } = useTheme('image', theme, props)
@@ -35,7 +35,7 @@ function preload(src: string | undefined, onLoad: Function | undefined) {
   }
 }
 
-if(typeof window !== undefined && Image) {
+if (typeof window !== undefined && Image) {
   watch(() => props.src, (src) => {
     preload(src, props.onLoad)
   }, { immediate: true })

@@ -25,3 +25,7 @@ export function isBoolean(target: never) {
 export function isNumber(target: never) {
   return typeof target === 'number'
 }
+
+export function isType(type: string, target: never) {
+  return Object.prototype.toString(undefined, target) === `[object ${type}]`
+}

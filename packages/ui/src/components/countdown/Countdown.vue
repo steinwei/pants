@@ -36,9 +36,9 @@ const props = withDefaults(defineProps<CountdownType>(), {
 })
 
 
-const current = ref(props.current);
-const timer = ref<any>(null);
-const remainTime = ref(0);
+const current = ref(props.current)
+const timer = ref<any>(null)
+const remainTime = ref(0)
 const endTime = ref(0)
 const delay = computed(() => props.delay || 0)
 const computedRest = computed(() => format(remainTime.value))
@@ -91,7 +91,7 @@ function format(timestamp: number) {
 }
 
 function destory() {
-  if(timer.value) {
+  if (timer.value) {
     cancelAnimationFrame(timer.value)
     timer.value = null
     props.onDestory && props.onDestory()
@@ -99,11 +99,11 @@ function destory() {
 }
 
 function stop() {
- if(timer.value) {
+  if (timer.value) {
     cancelAnimationFrame(timer.value)
     counting.value = false
     props.onPaused && props.onPaused(remainTime.value)
- }
+  }
 }
 
 function init() {
@@ -116,7 +116,7 @@ function init() {
 watch(() => props.paused, (newValue) => {
   if (isInited.value) {
     if (newValue) {
-      if(counting.value) {
+      if (counting.value) {
         stop()
       }
     } else {

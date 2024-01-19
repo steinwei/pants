@@ -1,0 +1,11 @@
+<view>
+  <sroll-view
+    class=""
+    bindscroll="scroll"
+    bindscrolltolower="bindscrolltolower"
+  >
+    <view class="virtual-list-wrapper">
+      <slot></slot>
+    </view>
+  </sroll-view>
+</view>

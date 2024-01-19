@@ -1,23 +1,18 @@
 <template>
-    <component :is="htmlTag" :class="[
-        $style.button,
-        classes.wrapper,
-        className,
-    ]"
-    :style="styles"
-    :type="type"
-    ref="elRef"
-    :disabled="computedDisabled || loading"
-    >
-        <span>
-            <slot></slot>
-        </span>
-    </component>
+  <component :is="htmlTag" :class="[
+    $style.button,
+    classes.wrapper,
+    className,
+  ]" :style="styles" :type="type" ref="elRef" :disabled="computedDisabled || loading">
+    <span>
+      <slot></slot>
+    </span>
+  </component>
 </template>
 
 <script lang="ts">
 export default {
-    name: "PButton"
+  name: "PButton"
 }
 </script>
 
@@ -30,29 +25,29 @@ import theme from './Button.theme'
 const elRef = ref(null)
 
 const props = defineProps({
-    color: {
-        type: String as PropType<'default' | 'primary' | 'danger' | 'disabled'>,
-        default: 'default',
-    },
-    disabled: {
-        type: Boolean,
-        default: false,
-    },
-    rounded: {
-        type: Boolean,
-        default: false,
-    },
-    type: {
-        type: String,
-        default: 'button',
-    },
-    size: String as PropType<'sm' | 'xs' | 'md' | 'lg'>,
-    className: String,
-    loading: Boolean,
-    tag: {
-        type: String,
-        default: 'button'
-    }
+  color: {
+    type: String as PropType<'default' | 'primary' | 'danger' | 'disabled'>,
+    default: 'default',
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  rounded: {
+    type: Boolean,
+    default: false,
+  },
+  type: {
+    type: String,
+    default: 'button',
+  },
+  size: String as PropType<'sm' | 'xs' | 'md' | 'lg'>,
+  className: String,
+  loading: Boolean,
+  tag: {
+    type: String,
+    default: 'button'
+  }
 })
 
 const { classes, styles } = useTheme('button', theme, props)
@@ -64,8 +59,8 @@ const htmlTag = computed(() => props.tag)
 
 <style module scoped>
 .button {
-    color: var(--p-button-text);
-    background-color: var(--p-button-bg);
-    border-color: var(--p-button-border);
+  color: var(--p-button-text);
+  background-color: var(--p-button-bg);
+  border-color: var(--p-button-border);
 }
 </style>
