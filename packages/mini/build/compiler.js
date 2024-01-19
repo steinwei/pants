@@ -1,5 +1,6 @@
 const path = require('path');
 
+const { exec } = require('child_process');
 const less = require('gulp-less');
 const tsc = require('gulp-typescript');
 const gulp = require('gulp');
@@ -10,11 +11,10 @@ const esmConfig = path.resolve(__dirname, '../tsconfig.json');
 const cjsDir = path.resolve(__dirname, '../lib');
 const cjsConfig = path.resolve(__dirname, '../tsconfig.node.json');
 
-const { exec } = require('child_process');
 
 function lessCompiler(dist) {
   return () => {
-    const srcPath = [`${src}/**/*.less`],
+    const srcPath = [`${src}/**/*.less`];
     return gulp.src(srcPath)
       .pipe(less())
   }
@@ -48,7 +48,8 @@ function copier(dist, ext) {
 }
 
 const tasks = [
- ['buildEs', esmDir, esmConfig], 
+  ['buildEs', esmDir, esmConfig],
+  ['buildLib', cjsDir, cjsConfig],
 ].reduce((prev, [name, ...args]) => {
   prev[name] = gulp.series(
     cleaner(...args),
@@ -63,14 +64,15 @@ const tasks = [
 
 tasks.buildExample = gulp.series(
   cleaner(exampleDistDir),
-  gulp.paraller(
+  gulp.parallel(
     tsCompiler(exampleDistDir),
     lessCompiler(exampleDistDir),
     assetsCopier(exampleDistDir),
   ),
   () => {
-    gulp.watch(`${src}/**/*.less`, lessCompiler(exampleDistDir)),
-    gulp.watch(`${src}/**/*.wxml`, copier(exampleDistDir)),
-
+    gulp.watch(`${src}/**/*.less`, lessCompiler(exampleDistDir));
+    gulp.watch(`${src}/**/*.wxml`, copier(exampleDistDir));
+    gulp.watch(`${src}/**/*.wxs`, copier(exampleDistDir));
+    gulp.watch(`${src}/**/*.json`, copier(exampleDistDir));
   }
 );

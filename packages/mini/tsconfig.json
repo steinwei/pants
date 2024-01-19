@@ -1,13 +1,34 @@
 {
   "compilerOptions": {
+    "module": "ES6",
+    "target": "ES6",
+    "esModuleInterop": true,
+    "declaration": true,
+    "noImplicitAny": false,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "strict": true,
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    "paths": {
+      "@/src/*": [
+        "./src/*"
+      ]
+    },
     "types": [
-      "node"
+      "node",
+      "@types/jest",
+      "miniprogram-api-typings",
     ]
   },
   "include": [
-    "src",
+    "src/**/*",
   ],
   "exclude": [
     "node_modules",
+    "src/**/test/*",
+    "src/**/demo/*",
   ]
 }

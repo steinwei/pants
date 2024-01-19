@@ -1,8 +1,14 @@
 {
+  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "target": "ES6",
-  },
-  "include": [
-    "build/*.ts",
-  ]
+    "module": "CommonJS",
+    "target": "ES5",
+    "lib": [
+      "ES2015",
+      "ES2017",
+      "DOM"
+    ],
+    "declaration": false,
+    "outDir": "lib"
+  }
 }

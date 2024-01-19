@@ -1,18 +1,19 @@
 export type OptionsType = {
+  behaviors: any;
 };
 
 function mapKeys(source, target) {
   Object.keys(source).forEach((key) => {
     if (source[key]) {
-      target[map[key]] = source[key];
+      target[key] = source[key];
     }
   })
 }
 
 export function PantsComponent(options) {
-  let state = {};
+  let state = {} as OptionsType;
 
-  mapKeys(optinos, {
+  mapKeys(options, {
     data: 'data',
     props: 'properties',
     watch: 'observers',
@@ -26,7 +27,7 @@ export function PantsComponent(options) {
   // default behaviors
 
   // default externalClasses
-  
+
   // default relations
   const { relation } = options;
   if (relation) {
@@ -35,7 +36,7 @@ export function PantsComponent(options) {
   }
 
   if (options.mixins) {
-    state.behaviors = { ...options.mixins }; 
+    state.behaviors = { ...options.mixins };
   }
 
   return Component(state);
